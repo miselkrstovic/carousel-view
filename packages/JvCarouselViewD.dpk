@@ -1,0 +1,54 @@
+package JvCarouselViewD;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS ON}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $4A3E0000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'JVCL Galactic Controls'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  designide,
+  JvCoreDesign,
+  JvCore,
+  JvStdCtrls,
+  Jcl,
+  JclVCL,
+  rtl,
+  vcl,
+  vclx,
+  dclstd,
+  vcldb,
+  dbrtl,
+// TODO:  vcljpg,
+  JvSystem,
+  JvCustom
+  ;
+
+contains
+  JvCarouselView in '..\src\JvCarouselView.pas';
+
+end.
+

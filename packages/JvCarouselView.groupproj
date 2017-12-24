@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8C92ABA3-FE32-452F-9007-0C04F3685F1F}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="JvCarouselViewD.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="JvCarouselViewR.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="JvCarouselViewD">
+        <MSBuild Projects="JvCarouselViewD.dproj"/>
+    </Target>
+    <Target Name="JvCarouselViewD:Clean">
+        <MSBuild Projects="JvCarouselViewD.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="JvCarouselViewD:Make">
+        <MSBuild Projects="JvCarouselViewD.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="JvCarouselViewR">
+        <MSBuild Projects="JvCarouselViewR.dproj"/>
+    </Target>
+    <Target Name="JvCarouselViewR:Clean">
+        <MSBuild Projects="JvCarouselViewR.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="JvCarouselViewR:Make">
+        <MSBuild Projects="JvCarouselViewR.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="JvCarouselViewD;JvCarouselViewR"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="JvCarouselViewD:Clean;JvCarouselViewR:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="JvCarouselViewD:Make;JvCarouselViewR:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
