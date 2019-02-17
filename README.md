@@ -8,7 +8,7 @@ Carousel-view is a navigation component that animates a series of graphical elem
 
 * ~~Data binding~~
 * Smooth animations and transitions
-* Automatic generation of image reflections
+* ~~Automatic generation of image reflections~~
 * Dynamic addition and removal of items
 * User clicking a particular element
 * User clicking the forward and back arrows
