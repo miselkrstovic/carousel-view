@@ -39,9 +39,11 @@ The Carousel View component utilizes modules from [Project JEDI](https://github.
 
 ...
 
-## Contribution
+## Contributing
 
-Contributions are welcome, please send PRs for any enhancements. For the list of planned features, enhancements, and bugs, it can be found in the [TODO](TODO.md) file.
+There are still a lot of missing features, and bugs to be squashed. For the curious they can be found in the [TODO](TODO.md) file.
+
+Please take a look at the [contributing](CONTRIBUTING.md) guidelines if you're interested in helping!
 
 ## License
 
