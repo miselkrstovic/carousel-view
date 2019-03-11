@@ -109,7 +109,7 @@ object frmMain: TfrmMain
       OnClick = btnChangeFontClick
     end
   end
-  object Panel1: TPanel
+  object pnlItemInformation: TPanel
     Left = 0
     Top = 569
     Width = 700
@@ -154,7 +154,6 @@ object frmMain: TfrmMain
     end
   end
   object JvImageList1: TJvImageList
-    ColorDepth = cd32Bit
     PixelFormat = pf32bit
     Items = <>
     Height = 255
@@ -163,7 +162,7 @@ object frmMain: TfrmMain
     Left = 24
     Top = 56
     Bitmap = {
-      494C01010100C800E800FF00FF00FFFFFFFF2000FFFFFFFFFFFFFFFF424D3600
+      494C01010100C8000400FF00FF00FFFFFFFF2000FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000FC030000FF000000010020000000000010E0
       0F00000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

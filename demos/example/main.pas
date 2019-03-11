@@ -37,7 +37,7 @@ type
     lblCarouselView: TLabel;
     FontDialog1: TFontDialog;
     btnChangeFont: TButton;
-    Panel1: TPanel;
+    pnlItemInformation: TPanel;
     lblItemSubtitle: TLabel;
     lblItemTitle: TLabel;
     procedure btnAddItemClick(Sender: TObject);
@@ -109,7 +109,6 @@ end;
 procedure TfrmMain.btnAddItemClick(Sender: TObject);
 var
   Item: TJvCarouselItem;
-  i: Integer;
 begin
   Item := JvCarouselView1.Items.Add;
   Item.Caption := 'Package #' + IntToStr(JvCarouselView1.Items.Count);

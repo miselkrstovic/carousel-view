@@ -20,7 +20,7 @@
 {   Heavily borrowed code from ComCtrls and CommCtrl.                          }
 {                                                                              }
 { Unit owner:    Mišel Krstović                                                }
-{ Last modified: September 14, 2017                                            }
+{ Last modified: March 10, 2019                                                }
 {                                                                              }
 {******************************************************************************}
 
@@ -32,11 +32,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls, ComCtrls,
-  ImgList, Contnrs, {DesignIntf, DesignEditors,} Math,
-{$IFDEF THREAD_ENABLED}
+  Dialogs, ExtCtrls, StdCtrls, ComCtrls, ImgList, Contnrs, Math,
+  {$IFDEF THREAD_ENABLED}
   JvThreadTimer,
-{$ENDIF}
+  {$ENDIF}
   ImageList, System.UITypes, JvExExtCtrls, JVCLVer;
 
 const
@@ -44,21 +43,6 @@ const
   UNDEFINED = -1;
 
 type
-  TPropertyAttributes = record
-  end;
-
-  TPropertyEditor = class
-  public
-    function GetAttributes: TPropertyAttributes; virtual;
-    procedure Edit; virtual;
-  end;
-
-  TJvCarouselViewItemsProperty = class(TPropertyEditor)
-  public
-    function GetAttributes: TPropertyAttributes; override;
-    procedure Edit; override;
-  end;
-
   TJvCarouselItem = class;
   TJvCarouselItems = class;
   TJvCarouselView = class;
@@ -139,7 +123,7 @@ type
     property Proportional: Boolean read FProportional write FProportional;
     property Index: Integer read GetIndex;
     property Highlight: Boolean read FHighlight write FHighlight;
-    procedure Assign(Source: TJvCarouselItem);
+    procedure Assign(Source: TPersistent); override;
     procedure Delete;
     property OnUpdate: TCVUpdateEvent read FOnUpdate write FOnUpdate;
   end;
@@ -373,7 +357,6 @@ type
     property AboutJVCL: TJVCLAboutInfo read FAboutJVCL write FAboutJVCL stored False;
   end;
 
-procedure Register;
 function BlendColors(Color1, Color2: TColor; Opacity: Byte): TColor;
 
 implementation
@@ -385,9 +368,39 @@ end;
 
 { TJvCarouselItem }
 
-procedure TJvCarouselItem.Assign(Source: TJvCarouselItem);
+procedure TJvCarouselItem.Assign(Source: TPersistent);
 begin
-  inherited Assign(Source);
+  if Source is TJvCarouselItem then begin
+    FOwner := TJvCarouselItem(Source).FOwner;
+    FIndex := TJvCarouselItem(Source).FIndex;
+    FOverlayIndex := TJvCarouselItem(Source).FOverlayIndex;
+    FStateIndex := TJvCarouselItem(Source).FStateIndex;
+    FDeleting := TJvCarouselItem(Source).FDeleting;
+    FXScale := TJvCarouselItem(Source).FXScale;
+    FYScale := TJvCarouselItem(Source).FYScale;
+    FInitialWidth := TJvCarouselItem(Source).FInitialWidth;
+    FInitialHeight := TJvCarouselItem(Source).FInitialHeight;
+    FData := TJvCarouselItem(Source).FData;
+    FExtras.Assign(TJvCarouselItem(Source).FExtras);
+    FImageIndex := TJvCarouselItem(Source).FImageIndex;
+    FCaption := TJvCarouselItem(Source).FCaption;
+    FHighlight := TJvCarouselItem(Source).FHighlight;
+
+    FWidth := TJvCarouselItem(Source).FWidth;
+    FHeight := TJvCarouselItem(Source).FHeight;
+    FStretch := TJvCarouselItem(Source).FStretch;
+    FProportional := TJvCarouselItem(Source).FProportional;
+    FAngle := TJvCarouselItem(Source).FAngle;
+    FDirection := TJvCarouselItem(Source).FDirection;
+    FDepth := TJvCarouselItem(Source).FDepth;
+    FOnUpdate := TJvCarouselItem(Source).FOnUpdate;
+
+    Picture.Assign(TJvCarouselItem(Source).Picture);
+    Left := TJvCarouselItem(Source).Left;
+    Top := TJvCarouselItem(Source).Top;
+  end else begin
+    inherited;
+  end;
 end;
 
 constructor TJvCarouselItem.Create(AOwner: TJvCarouselItems);
@@ -700,7 +713,7 @@ type
     StateIndex: Integer;
     OverlayIndex: Integer;
     Data: Pointer;
-    Caption: string[255];
+    Caption: String;
   end;
 
   TItemDataInfo = packed record
@@ -944,7 +957,7 @@ var
   i, Size, Len: Integer;
   ItemHeader: PItemHeader;
   ItemInfo: PItemInfo;
-  PStr: PShortStr;
+  PStr: PString;
 begin
   Clear;
   Stream.ReadBuffer(Size, SizeOf(Integer));
@@ -1176,6 +1189,8 @@ begin
   if (FCenterY + FRadiusY) <> 0 then
   begin
     S := (Item.Top - FPerspective) / (FCenterY + FRadiusY);
+  end else begin
+    S := 0;
   end;
   Item.XScale := S * 100;
   Item.YScale := S * 100;
@@ -1553,7 +1568,7 @@ end;
 
 procedure TJvCarouselView.SetMotion(const Value: TCarouselMotion);
 begin
-  if Assigned(Value) then FMotion := Value;  
+  if Assigned(Value) then FMotion := Value;
 end;
 
 procedure TJvCarouselView.SetNavigation(const Value: TCarouselNavigation);
@@ -1664,37 +1679,6 @@ begin
   Result := FIndex < FJvCarouselViewItems.Count - 1;
   if Result then
     Inc(FIndex);
-end;
-
-procedure Register;
-begin
-  RegisterComponents('Jv Visual', [TJvCarouselView]);
-  // todo:  RegisterPropertyEditor(TypeInfo(TJvCarouselItems), nil, '', TJvCarouselViewItemsProperty);
-end;
-
-{ TJvCarouselViewItemsProperty }
-
-procedure TJvCarouselViewItemsProperty.Edit;
-begin
-  inherited;
-  // TODO: Needs implementation
-end;
-
-function TJvCarouselViewItemsProperty.GetAttributes: TPropertyAttributes;
-begin
-  // TODO: Needs implementation
-end;
-
-{ TPropertyEditor }
-
-procedure TPropertyEditor.Edit;
-begin
-  // TODO: Needs implementation
-end;
-
-function TPropertyEditor.GetAttributes: TPropertyAttributes;
-begin
-  // TODO: Needs implementation
 end;
 
 { TCarouselNavigation }

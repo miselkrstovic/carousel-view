@@ -48,6 +48,7 @@ requires
   ;
 
 contains
+  JvCarouselViewReg in '..\src\JvCarouselViewReg.pas',
   JvCarouselView in '..\src\JvCarouselView.pas';
 
 end.

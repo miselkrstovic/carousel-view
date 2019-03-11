@@ -7,7 +7,7 @@
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Package</AppType>
         <FrameworkType>VCL</FrameworkType>
-        <ProjectVersion>18.4</ProjectVersion>
+        <ProjectVersion>18.5</ProjectVersion>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -87,6 +87,7 @@
         <DCCReference Include="dbrtl.dcp"/>
         <DCCReference Include="JvSystem.dcp"/>
         <DCCReference Include="JvCustom.dcp"/>
+        <DCCReference Include="..\src\JvCarouselViewReg.pas"/>
         <DCCReference Include="..\src\JvCarouselView.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
